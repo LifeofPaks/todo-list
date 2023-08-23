@@ -1,0 +1,18 @@
+@import "../../styles/Responsive.scss";
+@import "../../styles/Variables.scss";
+
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 2rem;
+    width: 100%;
+
+    p{
+        width: 100%;
+        color: $Dark-Grayish-Blue;
+        font-size: 13px;
+        text-align: center;
+
+    }
+}

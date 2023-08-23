@@ -1,0 +1,92 @@
+@import "../../styles/Responsive.scss";
+@import "../../styles/Variables.scss";
+
+.todo {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  flex-direction: column;
+  align-items: center;
+
+  .container{
+    width: 550px;
+
+    header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4.5rem;
+        width: 100%;
+      }
+    
+      .title{
+        font-size: 2.5rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+      }
+    
+      img{
+        width: 35px;
+        cursor: pointer;
+      }
+    
+      .typeHere{
+        width: 100%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding : 1.5rem;
+        border-radius: .5rem;
+        margin-top: 2rem;
+        transition: .5s;
+
+        &.darkMode{
+            background:$Very-Dark-Desaturated-Blue;
+
+            input{
+                color: #fff;
+            }
+        }
+
+        img{
+            width: 18px;
+        }
+
+        input{
+            width: 100%;
+            font-size: 18px;
+            font-family: 'Josefin Sans', sans-serif;
+            
+            &::placeholder{
+                opacity: .7;
+            }
+        }
+
+      }
+  }
+
+  .backgroundImg{
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    transition: .5s;
+  }
+
+  .background{
+    position: absolute;
+    background: $Very-Dark-Blue;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+    transition: .5s;
+  }
+
+}
+
+

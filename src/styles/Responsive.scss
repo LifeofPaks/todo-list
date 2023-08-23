@@ -1,0 +1,7 @@
+$Mobile : 480px;
+
+@mixin Mobile{
+    @media screen and (mx-width: ($Mobile)) {
+        @content
+    }
+}
