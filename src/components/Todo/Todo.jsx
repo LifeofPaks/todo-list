@@ -26,6 +26,23 @@ const Todo = ({
   dragEnter,
   drop,
 }) => {
+
+    // GREETING
+    let greeting
+    const date = new Date()
+    const hour = date.getHours()
+    
+    
+    if(hour < 12){
+      greeting = 'Good Morning!'
+    }
+     else if(hour >= 12 && hour < 16){
+      greeting = 'Good Afternoon!'
+    } 
+    else {
+      greeting = 'Good Evening!'
+    } 
+
   return (
     <div className="todo">
       <div className="container">
@@ -45,6 +62,8 @@ const Todo = ({
             )}
           </div>
         </header>
+
+        <p className="greeting"> {greeting}</p>
 
         <section className={`typeHere ${darkMode ? "darkMode" : ""}`}>
           <img
