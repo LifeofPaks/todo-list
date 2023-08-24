@@ -79,15 +79,26 @@
       align-items: center;
       justify-content: center;
       gap: 1rem;
+
+      p{
+        font-weight: bold;
+      }
+
+      .link{
+         
+        &:active{
+            color: $Bright-Blue;
+        }
+
+        &.active{
+            color: $Bright-Blue;
+        }
+      }
+
     }
 
-    p {
+    p:not(.itemsleft){
       cursor: pointer;
-      font-weight: bold;
-    }
-
-    .all {
-      color: $Bright-Blue;
     }
   }
 }

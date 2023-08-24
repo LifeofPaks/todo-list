@@ -1,38 +1,67 @@
 import React from "react";
 import "./TodoList.scss";
+import ActiveList from "../ActiveList/ActiveList";
+import AllTodos from "../AllTodos/AllTodos";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+import CompletedTask from "../CompletedTask/CompletedTask";
 
-const TodoList = ({ item, handleCheck, handleDelete, darkMode}) => {
+const TodoList = ({
+  item,
+  handleCheck,
+  handleDelete,
+  darkMode,
+  clearAll,
+  active,
+  inActive,
+  showAll,
+  actives,
+  completedTodo,
+  completed,
+  dragStart,
+  dragEnter,
+  drop,
+}) => {
   return (
-    <div className={`todoList ${darkMode ? 'darkMode': ''}`}>
-      {item.map((list) => (
-        <section key={list.id} className="todoItems ">
-          {list.checked ? (
-            <img
-              className="checked"
-              src="https://img.icons8.com/material-rounded/48/484b6a/checked-radio-button.png"
-              alt="checked-radio-button"
+    <div className={`todoList ${darkMode ? "darkMode" : ""}`}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AllTodos
+              item={item}
+              handleCheck={handleCheck}
+              handleDelete={handleDelete}
+              darkMode={darkMode}
+              dragStart={dragStart}
+              dragEnter={dragEnter}
+              drop={drop}
             />
-          ) : (
-            <img
-              className="unchecked"
-              src="https://img.icons8.com/material-outlined/24/484b6a/unchecked-radio-button.png"
-              alt="unchecked-radio-button"
+          }
+        />
+        <Route
+          path="active"
+          element={
+            <ActiveList
+              actives={actives}
+              handleCheck={handleCheck}
+              handleDelete={handleDelete}
+              darkMode={darkMode}
             />
-          )}
-          <p
-            onClick={() => handleCheck(list.id)}
-            className={`todoItem ${list.checked ? "completed" : ""}`}
-          >
-            {list.todo}{" "}
-          </p>
-          <img
-            onClick={() => handleDelete(list.id)}
-            className="delete"
-            src="https://img.icons8.com/material-rounded/48/484b6a/filled-trash.png"
-            alt="filled-trash"
-          />
-        </section>
-      ))}
+          }
+        />
+
+        <Route
+          path="completed"
+          element={
+            <CompletedTask
+              completed={completed}
+              handleCheck={handleCheck}
+              handleDelete={handleDelete}
+              darkMode={darkMode}
+            />
+          }
+        />
+      </Routes>
 
       <section className="summary">
         <p className="itemsleft">
@@ -43,11 +72,20 @@ const TodoList = ({ item, handleCheck, handleDelete, darkMode}) => {
             : "Your list is empty"}
         </p>
         <div className="action">
-          <p className="all">All</p>
-          <p className="active">Active</p>
-          <p className="completed">Completed</p>
+          <NavLink className="link" to="/" activeclassname="active">
+            <p onClick={showAll}> All </p>
+          </NavLink>
+          <NavLink className="link" to="active">
+            {" "}
+            <p onClick={active}>Active</p>
+          </NavLink>
+          <NavLink className="link" to="completed">
+            <p onClick={completedTodo}>Completed</p>
+          </NavLink>
         </div>
-        <p className="clear">Clear Completed</p>
+        <p className="clear" onClick={clearAll}>
+          Clear Completed
+        </p>
       </section>
     </div>
   );

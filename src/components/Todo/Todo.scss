@@ -2,12 +2,9 @@
 @import "../../styles/Variables.scss";
 
 .todo {
-  position: absolute;
-  z-index: 10;
   width: 100%;
   display: flex;
   justify-content: center;
-  left: 0;
   flex-direction: column;
   align-items: center;
 

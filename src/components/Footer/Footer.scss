@@ -3,10 +3,10 @@
 
 
 footer{
-    position: fixed;
-    left: 0;
-    bottom: 2rem;
     width: 100%;
+    z-index: 10;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 
     p{
         width: 100%;

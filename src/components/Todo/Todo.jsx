@@ -3,6 +3,7 @@ import "./Todo.scss";
 import TodoList from "../TodoList/TodoList";
 import DarkBg from "../../assets/bg-desktop-dark.jpg";
 import LightBg from "../../assets/bg-desktop-light.jpg";
+import ActiveList from "../ActiveList/ActiveList";
 
 const Todo = ({
   item,
@@ -10,7 +11,21 @@ const Todo = ({
   switchDisplayMode,
   darkMode,
   handleDelete,
+  addItem,
+  setAddItem,
+  addTodo,
+  clearAll,
+  active,
+  inActive,
+  showAll,
+  actives,
+  completedTodo,
+  completed,
+  dragStart,
+  dragEnter,
+  drop,
 }) => {
+
   return (
     <div className="todo">
       <div className="container">
@@ -31,20 +46,40 @@ const Todo = ({
           </div>
         </header>
 
-        <section className={`typeHere ${darkMode ? 'darkMode': ''}`}>
+        <section className={`typeHere ${darkMode ? "darkMode" : ""}`}>
           <img
             className="unchecked"
             src="https://img.icons8.com/material-outlined/24/484b6a/unchecked-radio-button.png"
             alt="unchecked-radio-button"
           />
-          <input type="text" placeholder="Create a new todo..." />
+          <form onSubmit={addTodo}>
+          <input
+            type="text"
+            placeholder="Create a new todo..."
+            value={addItem}
+            onChange={(e) => setAddItem(e.target.value)}
+          />
+          </form>
+        
         </section>
+
         <TodoList
           item={item}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
           darkMode={darkMode}
+          clearAll={clearAll}
+          active={active}
+          inActive={inActive}
+          showAll={showAll}
+            actives={actives}
+            completedTodo={completedTodo}
+            completed={completed}
+            dragStart={dragStart}
+            dragEnter={dragEnter}
+            drop={drop}
         />
+        
       </div>
       {darkMode ? (
         <img src={DarkBg} alt="darkbg" className="backgroundImg" />
