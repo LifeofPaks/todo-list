@@ -6,13 +6,17 @@ footer{
     width: 100%;
     z-index: 10;
     margin-top: 3rem;
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
 
     p{
         width: 100%;
         color: $Dark-Grayish-Blue;
         font-size: 13px;
         text-align: center;
+
+        @include Mobile{
+            font-size: 11px;
+          }
 
     }
 }

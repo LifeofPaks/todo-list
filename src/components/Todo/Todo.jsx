@@ -2,8 +2,9 @@ import React from "react";
 import "./Todo.scss";
 import TodoList from "../TodoList/TodoList";
 import DarkBg from "../../assets/bg-desktop-dark.jpg";
+import DarkBgMobile from "../../assets/bg-mobile-dark.jpg";
 import LightBg from "../../assets/bg-desktop-light.jpg";
-import ActiveList from "../ActiveList/ActiveList";
+import LightBgMobile from "../../assets/bg-mobile-light.jpg";
 
 const Todo = ({
   item,
@@ -25,7 +26,6 @@ const Todo = ({
   dragEnter,
   drop,
 }) => {
-
   return (
     <div className="todo">
       <div className="container">
@@ -53,14 +53,16 @@ const Todo = ({
             alt="unchecked-radio-button"
           />
           <form onSubmit={addTodo}>
-          <input
-            type="text"
-            placeholder="Create a new todo..."
-            value={addItem}
-            onChange={(e) => setAddItem(e.target.value)}
-          />
+            <input
+              type="text"
+              placeholder="Create a new todo..."
+              value={addItem}
+              onChange={(e) => setAddItem(e.target.value)}
+            />
+            <button>
+            <img src="https://img.icons8.com/ios-filled/100/484b6a/add--v1.png" alt="add--v1"/>
+            </button>
           </form>
-        
         </section>
 
         <TodoList
@@ -72,19 +74,24 @@ const Todo = ({
           active={active}
           inActive={inActive}
           showAll={showAll}
-            actives={actives}
-            completedTodo={completedTodo}
-            completed={completed}
-            dragStart={dragStart}
-            dragEnter={dragEnter}
-            drop={drop}
+          actives={actives}
+          completedTodo={completedTodo}
+          completed={completed}
+          dragStart={dragStart}
+          dragEnter={dragEnter}
+          drop={drop}
         />
-        
       </div>
       {darkMode ? (
-        <img src={DarkBg} alt="darkbg" className="backgroundImg" />
+        <picture className="backgroundImg">
+          <source media="(max-width : 480px)" srcSet={DarkBgMobile} />
+          <img src={DarkBg} alt="darkbg"  />
+        </picture>
       ) : (
-        <img src={LightBg} alt="darkbg" className="backgroundImg" />
+        <picture className="backgroundImg">
+          <source media="(max-width : 480px)" srcSet={LightBgMobile} />
+          <img src={LightBg} alt="darkbg"  />
+        </picture>
       )}
       {darkMode && <div className="background"></div>}
     </div>

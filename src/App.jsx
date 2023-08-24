@@ -1,18 +1,24 @@
-import react, { useRef, useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import "./App.scss";
 import Todo from "./components/Todo/Todo";
 import { lists } from "./Helper/data/Data";
 import Footer from "./components/Footer/Footer";
 import { Routes, useNavigate } from "react-router-dom";
+import { useAxiosFetch } from "./hooks/useAxiosFetch";
+import api from '../src/api/TodoData'
 
 
 function App() {
-  const [item, setItem] = useState(lists);
+  const [item, setItem] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
   const [addItem, setAddItem] = useState("");
   const [actives, setActives] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const {data, isLoading, fetchError} = useAxiosFetch('http://localhost:3507/todos')
 
+useEffect(()=>{
+  setItem(data)
+}, [data])
 
   const navigate = useNavigate()
   const dragItem = useRef()
@@ -29,10 +35,15 @@ function App() {
   };
 
   // HANDLE DELETE
-  const handleDelete = (id) => {
-    const deleteItem = item.filter((todo) => todo.id !== id);
-
-    setItem(deleteItem);
+  const handleDelete = async (id) => {
+    try{
+      await api.delete(`/todos/${id}`)
+      const deleteItem = item.filter((todo) => todo.id !== id);
+      setItem(deleteItem);
+    }
+    catch(err){
+      console.log(`Error: ${err.message}`)
+    }
     navigate('/')
   };
 
@@ -43,12 +54,20 @@ function App() {
 
   // ADD TODO
 
-  const addTodo = (e) => {
+  const addTodo = async (e) => {
     e.preventDefault();
     const id = item.length ? item[item.length - 1].id + 1 : 1;
     const newTodo = { id: id, checked: false, todo: addItem };
-    setItem([...item, newTodo]);
-    setAddItem("");
+
+    try{
+      const resp = await api.post('/todos', newTodo)
+      setItem([...item, resp.data]);
+      setAddItem("");
+    }
+    catch(err){
+      console.log(`Error: ${err.message}`)
+    }
+  
   };
 
   // SHOWALL ITEMS ON LIST
@@ -100,6 +119,8 @@ function App() {
     dragOverItem.current = null;
     setItem(copyListItems);
   };
+
+
 
   return (
     <div>

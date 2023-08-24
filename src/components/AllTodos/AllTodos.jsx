@@ -37,7 +37,7 @@ const AllTodos = ({
             onClick={() => handleCheck(list.id)}
             className={`todoItem ${list.checked ? "completed" : ""}`}
           >
-            {list.todo}{" "}
+            {list.todo}
           </p>
           {darkMode ? (
             <img

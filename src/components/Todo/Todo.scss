@@ -8,8 +8,19 @@
   flex-direction: column;
   align-items: center;
 
+  @include Mobile{
+    justify-content: unset;
+    align-items: unset;
+  }
+
   .container{
     width: 550px;
+
+    @include Mobile{
+      width: 90%;
+      margin-inline: auto;
+    }
+
 
     header{
         display: flex;
@@ -17,6 +28,12 @@
         justify-content: space-between;
         margin-top: 4.5rem;
         width: 100%;
+
+        @include Mobile{
+          margin-top: 3rem;
+        }
+
+    
       }
     
       .title{
@@ -24,11 +41,19 @@
         color: #fff;
         text-transform: uppercase;
         letter-spacing: 10px;
+
+        @include Mobile{
+          font-size: 1.7rem;
+        }
       }
     
       img{
         width: 35px;
         cursor: pointer;
+
+        @include Mobile{
+          width: 27px;
+        }
       }
     
       .typeHere{
@@ -42,6 +67,11 @@
         margin-top: 2rem;
         transition: .5s;
 
+        @include Mobile{
+          gap: .5rem;
+          padding : 1rem;
+        }
+
         &.darkMode{
             background:$Very-Dark-Desaturated-Blue;
 
@@ -50,14 +80,41 @@
             }
         }
 
+        form{
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+
+          input{
+            width: 100%;
+          }
+
+          button{
+            display: none;
+
+            @include Mobile{
+              display: block;
+            }
+          }
+        }
+
         img{
             width: 18px;
+
+            @include Mobile{
+              width: 14px;
+            }
         }
 
         input{
             width: 100%;
             font-size: 18px;
             font-family: 'Josefin Sans', sans-serif;
+
+            @include Mobile{
+              font-size: 13px;
+            }
             
             &::placeholder{
                 opacity: .7;
@@ -79,9 +136,10 @@
     background: $Very-Dark-Blue;
     top: 0;
     width: 100%;
-    height: 100vh;
     z-index: -2;
     transition: .5s;
+    bottom: 0;
+    min-height: 100vh;
   }
 
 }
