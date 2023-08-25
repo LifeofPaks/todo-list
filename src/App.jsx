@@ -3,10 +3,9 @@ import "./App.scss";
 import Todo from "./components/Todo/Todo";
 import { lists } from "./Helper/data/Data";
 import Footer from "./components/Footer/Footer";
-import { Routes, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAxiosFetch } from "./hooks/useAxiosFetch";
-import api from '../src/api/TodoData'
-
+import api from "../src/api/TodoData";
 
 function App() {
   const [item, setItem] = useState([]);
@@ -14,42 +13,38 @@ function App() {
   const [addItem, setAddItem] = useState("");
   const [actives, setActives] = useState([]);
   const [completed, setCompleted] = useState([]);
-  const {data, isLoading, fetchError} = useAxiosFetch('http://localhost:3507/todos')
+  const { data, isLoading, fetchError } = useAxiosFetch(
+    "http://localhost:3507/todos"
+  );
 
-useEffect(()=>{
-  setItem(data)
-}, [data])
+  // SWITCH DISPLAY MODE
+  const switchDisplayMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-  const navigate = useNavigate()
-  const dragItem = useRef()
-  const dragOverItem = useRef()
-
+ 
+  const navigate = useNavigate();
+  const dragItem = useRef();
+  const dragOverItem = useRef();
 
   // HANDLE CHECK AND COMPLETED
   const handleCheck = (id) => {
     const completed = item.map((list) =>
       list.id === id ? { ...list, checked: !list.checked } : list
     );
-
     setItem(completed);
   };
 
   // HANDLE DELETE
   const handleDelete = async (id) => {
-    try{
-      await api.delete(`/todos/${id}`)
+    try {
+      await api.delete(`/todos/${id}`);
       const deleteItem = item.filter((todo) => todo.id !== id);
       setItem(deleteItem);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
     }
-    catch(err){
-      console.log(`Error: ${err.message}`)
-    }
-    navigate('/')
-  };
-
-  // SWITCH DISPLAY MODE
-  const switchDisplayMode = () => {
-    setDarkMode(!darkMode);
+    navigate("/");
   };
 
   // ADD TODO
@@ -59,15 +54,13 @@ useEffect(()=>{
     const id = item.length ? item[item.length - 1].id + 1 : 1;
     const newTodo = { id: id, checked: false, todo: addItem };
 
-    try{
-      const resp = await api.post('/todos', newTodo)
+    try {
+      const resp = await api.post("/todos", newTodo);
       setItem([...item, resp.data]);
       setAddItem("");
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
     }
-    catch(err){
-      console.log(`Error: ${err.message}`)
-    }
-  
   };
 
   // SHOWALL ITEMS ON LIST
@@ -78,17 +71,15 @@ useEffect(()=>{
   // CLEAR ALL ITEMS
   const clearAll = () => {
     setItem([]);
-    setActives([])
-    setCompleted([])
+    setActives([]);
+    setCompleted([]);
   };
-
 
   // SHOW ONLY ACTIVE LIST
   const active = () => {
     const activeTodo = item.filter((todo) => todo.checked === false);
     setActives(activeTodo);
   };
-
 
   // SHOW ONLY COMPLETED LIST
   const completedTodo = () => {
@@ -99,14 +90,14 @@ useEffect(()=>{
   // DRAG AND DROP ITEM==========================
 
   // DRAG START
-  const dragStart = (e, position) =>{
-    dragItem.current = position
-  }
+  const dragStart = (e, position) => {
+    dragItem.current = position;
+  };
 
   // DRAG ENTER
-  const dragEnter =(e, position)=>{
-    dragOverItem.current.position
-  }
+  const dragEnter = (e, position) => {
+    dragOverItem.current.position;
+  };
 
   // DROP
 
@@ -119,7 +110,12 @@ useEffect(()=>{
     dragOverItem.current = null;
     setItem(copyListItems);
   };
-  
+
+  useEffect(() => {
+    setItem(data);
+    setDarkMode(darkMode)
+  }, [data, darkMode]);
+
 
   return (
     <div>
