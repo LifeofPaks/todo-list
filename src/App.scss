@@ -24,16 +24,37 @@ a{
 }
 
 
-body{
+.App{
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     position: relative;
     overflow-x: hidden;
+    width: 100vw;
+    background-image: url('./assets/bg-desktop-light.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    transition: .3s;
+    min-height: 100vh;
 
     @include Mobile{
-        display: unset;
+        background-image: url('./assets/bg-mobile-light.jpg');
+        background-size: contain;
     }
+
+    &.dark{
+        background: $Very-Dark-Blue;
+        background-image: url('./assets/bg-desktop-dark.jpg');
+        background-repeat: no-repeat;
+
+        @include Mobile{
+            background-image: url('./assets/bg-mobile-dark.jpg');
+            background-size: contain;
+        }
+    }
+
+
 
     &::-webkit-scrollbar{
         display: none;

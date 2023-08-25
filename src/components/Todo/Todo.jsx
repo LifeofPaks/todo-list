@@ -101,7 +101,7 @@ const Todo = ({
           drop={drop}
         />
       </div>
-      {darkMode ? (
+      {/* {darkMode ? (
         <picture className="backgroundImg">
           <source media="(max-width : 480px)" srcSet={DarkBgMobile} />
           <img src={DarkBg} alt="darkbg"  />
@@ -112,7 +112,7 @@ const Todo = ({
           <img src={LightBg} alt="darkbg"  />
         </picture>
       )}
-      {darkMode && <div className="background"></div>}
+      {darkMode && <div className="background"></div>} */}
     </div>
   );
 };

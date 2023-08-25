@@ -118,7 +118,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className={`App ${darkMode ? 'dark' : ''}`}>
       <Todo
         item={item}
         handleCheck={handleCheck}
