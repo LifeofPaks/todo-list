@@ -27,7 +27,6 @@ a{
 .App{
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     position: relative;
     overflow-x: hidden;
@@ -36,7 +35,7 @@ a{
     background-repeat: no-repeat;
     height: 100%;
     transition: .3s;
-    min-height: 100vh;
+    height: 100vh;
 
     @include Mobile{
         background-image: url('./assets/bg-mobile-light.jpg');
